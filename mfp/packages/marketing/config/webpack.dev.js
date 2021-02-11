@@ -1,7 +1,8 @@
 const { merge } = require('webpack-merge'); // merge is a function that we can use to merge together two different web config objects.
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // It takes some kind of HTML file inside of project and inject couple of different script tags inside of it.
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const commonConfig = require('./webpack.common');
-// const { module } = require('./webpack.common');
+
 
 const devConfig = {
     mode: 'development',
@@ -12,6 +13,13 @@ const devConfig = {
         }
     },
     plugins: [
+        new ModuleFederationPlugin({
+            name: 'marketing',
+            filename: 'remoteEntry.js',
+            exposes: {
+                './MarketingApp': './src/bootstrap'
+            },
+        }),
         new HtmlWebpackPlugin({
             template: './public/index.html'
         })
