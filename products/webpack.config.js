@@ -14,6 +14,11 @@ module.exports = {
                 './ProductsIndex': './src/index'
             },
             shared: ['faker']
+            // shared: {
+            //     faker: {
+            //         singleton: true // singleton true means that we only want to load up one single copy of faker no matter what.
+            //     }
+            // }
         }),
         new HtmlWebpackPlugin({
             template: './public/index.html'
